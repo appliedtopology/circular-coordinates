@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 HERE = pathlib.Path(__file__).parent
 
 VERSION = '0.1.0'
-PACKAGE_NAME = 'circular-coordinates'
+PACKAGE_NAME = 'circularcoordinates'
 AUTHOR = 'Mikael Vejdemo Johansson, Bilal AbdulRahman'
 AUTHOR_EMAIL = 'mikael.vejdemojohansson@csi.cuny.edu, bilal.z.work@gmail.com'
 URL = 'https://github.com/appliedtopology/circular-coordinates'
@@ -31,11 +31,11 @@ setup(name=PACKAGE_NAME,
       version=VERSION,
       description=DESCRIPTION,
       long_description=LONG_DESCRIPTION,
+      url=URL,
       long_description_content_type=LONG_DESC_TYPE,
       author=AUTHOR,
       license=LICENSE,
       author_email=AUTHOR_EMAIL,
-      url=URL,
       install_requires=INSTALL_REQUIRES,
       packages=find_packages(),
       keywords=keywords,

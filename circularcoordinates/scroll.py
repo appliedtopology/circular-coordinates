@@ -1,11 +1,11 @@
+
 import matplotlib
 # Make sure that we are using QT5
-matplotlib.use('Qt5Agg')
+# matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
 from PyQt5 import QtWidgets,QtCore
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-import time
 import sys
 
 class ScrollableWindow(QtWidgets.QMainWindow):

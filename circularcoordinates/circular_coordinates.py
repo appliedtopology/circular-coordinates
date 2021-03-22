@@ -1,9 +1,10 @@
 from scipy import sparse
 from sklearn import decomposition, preprocessing
 from ripser import ripser
-import plotting
 import numpy as np
 from scipy import spatial
+from  .plotting import *
+
 
 def ripsr(data,prime):
     """
@@ -250,7 +251,7 @@ class circular_coordinates():
 
             all_,_=self.all_verts()
             if plot:
-                plotting.plot_check_all(self.rips,all_)
+                plot_check_all(self.rips,all_)
             return all_
 
         elif check=='Max':
@@ -260,7 +261,7 @@ class circular_coordinates():
 
             max_,max_list,_=self.max_verts(intr=intr)
             if plot:
-                plotting.plot_check_max(max_,max_list)
+                plot_check_max(max_,max_list)
             return max
         else:
             if arg_eps is None:
@@ -270,7 +271,7 @@ class circular_coordinates():
             self.vertex_values=self.minimize(delta,cocycles)
             if plot:
                 self.PCA_(self.data)
-                plotting.plot_PCA(self.data_pca,self.vertex_values)
+                plot_PCA(self.data_pca,self.vertex_values)
             return self.vertex_values
             # self.plot_diagram_density(self.rips["dgms"][1])
             # self.plot_bars(self.rips["dgms"][1])
@@ -382,7 +383,7 @@ class circular_coordinates():
             3d_max:3d scatter plot over the largest persistance barcode
             # poly_all(not recommended):3d polygon plot with all persistance barcodes
             # poly_max:3d polygon plot over the largest persistance barcode
-        all other parameters please refer to plot_eps and plot_eps_3d in plotting.py
+        all other parameters please refer to plot_eps and plot_eps_3d in py
 
        
         """
@@ -406,34 +407,34 @@ class circular_coordinates():
             twodkwargs={"fig_size":(10,10),'ax':None,"pt_style":None}
             if kwargs is not None:
                 twodkwargs.update(kwargs)
-            plotting.plot_eps(p1,self.vertex_values,**twodkwargs)
+            plot_eps(p1,self.vertex_values,**twodkwargs)
 
         elif type=='2d_max':
             vert,vert_list,dist_=self.max_verts(intr=intr,dist=dist)
             twodkwargs={'ax':None,"pt_style":None,"scrollable":False}
             if kwargs is not None:
                 twodkwargs.update(kwargs)
-            plotting.plot_eps(p1,vert,type='Max',vert_list=vert_list,dist=dist_,**twodkwargs)
+            plot_eps(p1,vert,type='Max',vert_list=vert_list,dist=dist_,**twodkwargs)
         elif type=='2d_all':
             vert,dist_=self.all_verts(dist=dist)
             twodkwargs={'ax':None,"pt_style":None,"scrollable":False}
             if kwargs is not None:
                 twodkwargs.update(kwargs)
-            plotting.plot_eps(p1,vert,rips=self.rips,type='All',dist=dist_,**twodkwargs)
+            plot_eps(p1,vert,rips=self.rips,type='All',dist=dist_,**twodkwargs)
         elif type=='3d_max':
             threedkwargs={"fig_size":(10,10)}
             if kwargs is not None:
                 
                 threedkwargs.update(kwargs)
             vert,vert_list,_=self.max_verts(intr=intr)
-            plotting.plot_eps_3d(p1,vert,type='Max',vert_list=vert_list,**threedkwargs)
+            plot_eps_3d(p1,vert,type='Max',vert_list=vert_list,**threedkwargs)
         elif type=='3d_all':
             threedkwargs={"fig_size":(10,10)}
             if kwargs is not None:
                 
                 threedkwargs.update(kwargs)
             vert,_=self.all_verts()
-            plotting.plot_eps_3d(p1,vert,rips=self.rips,type='All',**threedkwargs)
+            plot_eps_3d(p1,vert,rips=self.rips,type='All',**threedkwargs)
   
 
     def plot_barcode(self,type='bar',**kwargs):
@@ -449,7 +450,7 @@ class circular_coordinates():
             hist:Plot the histogram of point density
             bar:Plot the barcode as bars.
 
-        all other parameters please refer to plot_diagram, plot_diagram_density and plot_bars in plotting.py
+        all other parameters please refer to plot_diagram, plot_diagram_density and plot_bars in py
 
 
         """
@@ -463,7 +464,7 @@ class circular_coordinates():
             if kwargs is not None:
                 scatkwargs.update(kwargs)
 
-            plotting.plot_diagram(self.rips['dgms'][1],**scatkwargs)
+            plot_diagram(self.rips['dgms'][1],**scatkwargs)
 
         elif type=='hist':
             histkwargs={"labels":True,"hist_style":None,"diagonal":True,'ax':None,"lognorm":True}
@@ -471,14 +472,14 @@ class circular_coordinates():
                 histkwargs.update(kwargs)
 
 
-            plotting.plot_diagram_density(self.rips['dgms'][1],**histkwargs)
+            plot_diagram_density(self.rips['dgms'][1],**histkwargs)
             
         elif type=='bar':
             barkwargs={"order":'birth',"bar_style":None,'ax':None}
             if kwargs is not None:
                 barkwargs.update(kwargs)
 
-            plotting.plot_bars(self.rips['dgms'][1],**barkwargs)
+            plot_bars(self.rips['dgms'][1],**barkwargs)
 
 
 

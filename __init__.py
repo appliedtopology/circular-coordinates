@@ -1,2 +1,0 @@
-from circular_coordinates import circular_coordinates
-import plotting

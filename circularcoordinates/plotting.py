@@ -5,7 +5,7 @@ from matplotlib.collections import PolyCollection
 from matplotlib import colors as mcolors
 import numpy as np
 import math
-from scroll import ScrollableWindow
+from .scroll import ScrollableWindow
 
 
 
