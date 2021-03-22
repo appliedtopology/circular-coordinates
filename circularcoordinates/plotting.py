@@ -50,8 +50,8 @@ def plot_check_all(rips,vert,fig_size=(10,10),ax=None, pt_style=None):
     Function to plot circular cordinates of all persistance barcodes
     ----------
     Parameters:
-        data_pca :(ndarray) 
-            pca of the input data in 2 dimensions
+        rips :(dict) 
+            ripser output dictionary
         vert : ndarray
                 array of circulare coordinates mapped to (0,1)
         fig_size : tuple
@@ -84,8 +84,6 @@ def plot_check_max(vert,vert_list,fig_size=(10,10),ax=None, pt_style=None):
     Function to plot circular cordinates over the largest persistance barcode
     ----------
     Parameters:
-        data_pca :(ndarray) 
-            pca of the input data in 2 dimensions
         vert : ndarray
                 array of circulare coordinates mapped to (0,1)
         vert_list : list
