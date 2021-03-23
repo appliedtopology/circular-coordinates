@@ -10,16 +10,15 @@ from .scroll import ScrollableWindow
 
 
 
-
-def plot_PCA(data_pca,vert,xlabel='Principal Component 1',ylabel='Principal Component 2',fig_size=(10,10),ax=None, pt_style=None):
+def plot_2dim(data,vert,xlabel='Principal Component 1',ylabel='Principal Component 2',fig_size=(10,10),ax=None, pt_style=None):
     """
-    Function to plot data_pca with circular cordinates represented as colors on the rgb color wheel
+    Function to plot 2 dimensional data with circular cordinates represented as colors on the rgb color wheel
     ----------
     Parameters:
-        data_pca :(ndarray) 
-            pca of the input data in 2 dimensions
+        data :(ndarray) 
+            input data in 2 dimensions
         vert : ndarray
-                array of circulare coordinates mapped to (0,1)
+                array of circular coordinates mapped to (0,1)
         xlabel : string
                 label of the x-axis
         ylabel : string
@@ -40,54 +39,54 @@ def plot_PCA(data_pca,vert,xlabel='Principal Component 1',ylabel='Principal Comp
     plt.figure(figsize=fig_size)   
     if ax is None:
         ax = plt.axes()
-    ax.scatter(data_pca[:,0], data_pca[:,1], c=vert,cmap=plt.cm.hsv, **pt_kwargs)
+    ax.scatter(data[:,0], data[:,1], c=vert,cmap=plt.cm.hsv, **pt_kwargs)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     plt.show()
 
-def plot_check_all(rips,vert,fig_size=(10,10),ax=None, pt_style=None):
-    """
-    Function to plot circular cordinates of all persistance barcodes
-    ----------
-    Parameters:
-        rips :(dict) 
-            ripser output dictionary
-        vert : ndarray
-                array of circulare coordinates mapped to (0,1)
-        fig_size : tuple
-                size of plotted figure(default=(10,10))
-        ax: AxesSubplot
-            Axes that should be used for plotting (Default: None)
-        pt_style: dict
-            argments passed to `ax.scatter` for style of points.
+# def plot_all(dgms,vert,fig_size=(10,10),ax=None, pt_style=None):
+#     """
+#     Function to plot circular cordinates of all persistance barcodes
+#     ----------
+#     Parameters:
+#         data_pca :(ndarray) 
+#             pca of the input data in 2 dimensions
+#         vert : ndarray
+#                 array of circulare coordinates mapped to (0,1)
+#         fig_size : tuple
+#                 size of plotted figure(default=(10,10))
+#         ax: AxesSubplot
+#             Axes that should be used for plotting (Default: None)
+#         pt_style: dict
+#             argments passed to `ax.scatter` for style of points.
         
 
-    """
-    pt_kwargs = {}
-    if pt_style is not None:
-        pt_kwargs.update(pt_style)
+#     """
+#     pt_kwargs = {}
+#     if pt_style is not None:
+#         pt_kwargs.update(pt_style)
 
-    plt.figure(figsize=fig_size)
-    if ax is None:
-        ax = plt.axes()
-    for ind,eps in enumerate(rips["dgms"][1]):
-        eps=eps[1]
-        verti=vert[ind]
-        y=np.ones(len(verti))*eps
-        ax.scatter(verti, y, c=verti,cmap=plt.cm.hsv, **pt_kwargs)
-    ax.set_xlabel('Circular Cordinates')
-    ax.set_ylabel('epsilon')
-    plt.show()   
+#     plt.figure(figsize=fig_size)
+#     if ax is None:
+#         ax = plt.axes()
+#     for ind,eps in enumerate(dgms):
+#         eps=eps[1]
+#         verti=vert[ind]
+#         y=np.ones(len(verti))*eps
+#         ax.scatter(verti, y, c=verti,cmap=plt.cm.hsv, **pt_kwargs)
+#     ax.set_xlabel('Circular Cordinates')
+#     ax.set_ylabel('epsilon')
+#     plt.show()   
         
-def plot_check_max(vert,vert_list,fig_size=(10,10),ax=None, pt_style=None):
+def plot_multi(vert,vert_list,fig_size=(10,10),ax=None, pt_style=None):
     """
-    Function to plot circular cordinates over the largest persistance barcode
+    Function to plot circular cordinates of mutiple persistance barcodes
     ----------
     Parameters:
         vert : ndarray
-                array of circulare coordinates mapped to (0,1)
+                array of arrays of circular coordinates mapped to (0,1)
         vert_list : list
-               list of points between birth and death of the largest persistance barcode
+               list of epsilons
         fig_size : tuple
                 size of plotted figure(default=(10,10))
         ax: AxesSubplot
@@ -112,7 +111,7 @@ def plot_check_max(vert,vert_list,fig_size=(10,10),ax=None, pt_style=None):
     plt.show()
 
 
-def plot_eps(p1,vert,dist=None,rips=None,type=None,vert_list=None,fig_size=(10,10),ax=None, pt_style=None,scrollable=False):
+def plot_eps(p1,vert,dist=None,type=None,vert_list=None,fig_size=(10,10),ax=None, pt_style=None,scrollable=False):
 
         """
         Function to plot external data with the circular coordinates as a scatter plot
@@ -121,11 +120,13 @@ def plot_eps(p1,vert,dist=None,rips=None,type=None,vert_list=None,fig_size=(10,1
             p1 :(ndarray) 
                 external data
             vert : ndarray
-                    array of circulare coordinates mapped to (0,1)
+                    array of circular coordinates mapped to (0,1)
+            dist : ndarray
+                    array of distances to display along side plot
             type : str
-                    specify plotting against circular coordinates of all persistence barcodes or largest persistence barcode: 'All' or 'Max' 
+                    specify plotting against circular coordinates of all persistence barcodes or largest persistence barcode: 'multi' or None 
             vert_list: ndarray
-                list of points between the birth and death of the largest persistance barcode 
+                list of epsilons
             fig_size : tuple
                     size of plotted figure(default=(10,10)) (only used if All and Max are False)
             ax: AxesSubplot
@@ -142,20 +143,9 @@ def plot_eps(p1,vert,dist=None,rips=None,type=None,vert_list=None,fig_size=(10,1
         if pt_style is not None:
             pt_kwargs.update(pt_style)
 
-        if type=='All':
-            fig=plt.figure(figsize=(10,len(vert)))
-            xx=math.ceil(len(vert)/3)
-            for ind,eps in enumerate(rips["dgms"][1]):
-                plt.subplot(xx, 3,ind+1 )
-                plt.scatter(p1,vert[ind], c=vert[ind],cmap=plt.cm.hsv ,**pt_kwargs)
-                plt.title('eps='+str(eps[1])[:4] +', dist='+ str(dist[ind])[:4])
-            plt.tight_layout()
-            if scrollable:
-                a = ScrollableWindow(fig)
-            else:
-                plt.show()
+       
             
-        elif type=='Max':
+        if type=='multi':
             fig=plt.figure(figsize=(10,len(vert)))
             xx=math.ceil(len(vert)/3)
             for ind,eps in enumerate(vert_list):
@@ -182,7 +172,7 @@ def plot_eps(p1,vert,dist=None,rips=None,type=None,vert_list=None,fig_size=(10,1
            
             plt.show()
 
-def plot_eps_3d(p1,vert,rips=None,type='All',vert_list=None,fig_size=(10,10)):
+def plot_eps_3d(p1,vert,vert_list=None,fig_size=(10,10)):
 
         """
         Function to plot external data with the circular coordinates as a 3d scatter plot
@@ -195,7 +185,7 @@ def plot_eps_3d(p1,vert,rips=None,type='All',vert_list=None,fig_size=(10,10)):
             type : str
                     specify plotting against circular coordinates of all persistence barcodes or largest persistence barcode: 'All' or 'Max' 
             vert_list: ndarray
-                list of points between the birth and death of the largest persistance barcode 
+                list of epsilons
             fig_size : tuple
                     size of plotted figure(default=(10,10)) 
             
@@ -203,21 +193,12 @@ def plot_eps_3d(p1,vert,rips=None,type='All',vert_list=None,fig_size=(10,10)):
 
         """
 
-        if type=='All':
-            fig=plt.figure(figsize=(10,10))
-            
-            xx=math.ceil(len(vert)/3)
-            ax = fig.gca(projection='3d')
-            for ind,eps in enumerate(rips["dgms"][1]):
-                ax.scatter(p1, eps[1],vert[ind], c=vert[ind],cmap=plt.cm.hsv)
-            
-        elif type=='Max':
-            fig=plt.figure(figsize=(10,10))
-        
-            xx=math.ceil(len(vert)/3)
-            ax = fig.gca(projection='3d')
-            for ind,eps in enumerate(vert_list):
-                ax.scatter(p1,  eps, vert[ind], c=vert[ind],cmap=plt.cm.hsv)
+        fig=plt.figure(figsize=(10,10))
+    
+        xx=math.ceil(len(vert)/3)
+        ax = fig.gca(projection='3d')
+        for ind,eps in enumerate(vert_list):
+            ax.scatter(p1,  eps, vert[ind], c=vert[ind],cmap=plt.cm.hsv)
 
         
         plt.xlabel('Data')
@@ -228,31 +209,7 @@ def plot_eps_3d(p1,vert,rips=None,type='All',vert_list=None,fig_size=(10,10)):
         plt.show()
 
 
-# def cc(arg):
-#     return mcolors.to_rgba(arg, alpha=0.6)
-            
-# def cols(leng):
-#     """
-#     Function to cycle red,green,blue and yellow colors for matplotlib
-#     ----------
-#     Parameters:
-#         leng : int 
-#             number of times to cycle
-#     Returns:
-#         lis: list
-#             list of cycled colors
-        
-        
 
-#     """
-#     colr=['r','g','b','y']
-#     x=0
-#     lis=[]
-#     while x<leng:
-#         inds=x%4
-#         lis.append(cc(colr[inds]))
-#         x+=1
-#     return lis
             
 
 def plot_bars(dgm, order='birth', ax=None, bar_style=None):
