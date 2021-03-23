@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = '0.1.2'
+VERSION = '0.1.1'
 PACKAGE_NAME = 'circularcoordinates'
 AUTHOR = 'Mikael Vejdemo Johansson, Bilal AbdulRahman'
 AUTHOR_EMAIL = 'mikael.vejdemojohansson@csi.cuny.edu, bilal.z.work@gmail.com'
