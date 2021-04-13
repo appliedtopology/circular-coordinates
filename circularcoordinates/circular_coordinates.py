@@ -34,7 +34,7 @@ def errs(str_,err_,errs_):
             raise ValueError(str_+ ' can only be '+ str(errs_)[1:-1])
 
 
-class circular_coordinates():
+class circular_coordinate():
     """
         This is the  main class for circular-coordinates library used to create and plot circular coordinates from persistent cohomology 
         ----------
@@ -123,7 +123,7 @@ class circular_coordinates():
     
     def cocycles(self,rips,distances,edges,dshape,prime,spec=None):
         """
-        extracts cocycles
+        Extracts cocycles
         ----------
         Parameters:
 
@@ -177,7 +177,7 @@ class circular_coordinates():
     def minimize(self,Delta,cocycle):
 
         """
-        minimizes ∥ζ-𝛿1α∥2 and computes vertex values map to [0,1]
+        Minimizes ∥ζ-𝛿1α∥2 and computes vertex values map to [0,1]
         ----------
         Parameters:
 
@@ -217,10 +217,10 @@ class circular_coordinates():
         return data_pca
   
         
-    def circular_coordinates(self,rips,prime,vertex_values=None,arg_eps=None,check=None,intr=10):
+    def circular_coordinate(self,rips,prime,vertex_values=None,arg_eps=None,check=None,intr=10):
         
         """
-            computes and plots the circular_coordinates
+            Computes and plots the circular_coordinates
         ----------
         Parameters:
 
@@ -255,7 +255,7 @@ class circular_coordinates():
         if check=='All':
 
             if vertex_values is None:
-                vertex_values=self.circular_coordinates(rips,prime)
+                vertex_values=self.circular_coordinate(rips,prime)
 
             all_,_=self.all_verts(rips,prime,vertex_values)
             return all_,[x[1] for x in rips['dgms'][1]]
@@ -263,7 +263,7 @@ class circular_coordinates():
         elif check=='Max':
 
             if vertex_values is None:
-                vertex_values=self.circular_coordinates(rips,prime)
+                vertex_values=self.circular_coordinate(rips,prime)
 
             max_,max_list,_=self.max_verts(rips,prime,vertex_values,intr=intr)
 
@@ -281,7 +281,7 @@ class circular_coordinates():
     def all_verts(self,rips,prime,init_verts,dist=None):
 
         """
-        function to find circular coordinates for all persistence barcodes
+        Function to find circular coordinates for all persistence barcodes
         ----------
         Parameters:
         rips : dict
@@ -321,7 +321,7 @@ class circular_coordinates():
     def max_verts(self,rips,prime,init_verts,intr=10,dist=None):
 
         """
-        function to find circular coordinates over the largest persistence barcode
+        Function to find circular coordinates over the largest persistence barcode
         ----------
 
         Parameters:
@@ -370,7 +370,7 @@ class circular_coordinates():
     def get_dist(self,init_verts,vert,dist='l1'):
 
         """
-        convenience function to find distance between two sets of circular coordinates
+        Convenience function to find distance between two sets of circular coordinates
         ----------
 
         Parameters:
@@ -399,7 +399,7 @@ class circular_coordinates():
     def get_dist_all(self,init_verts,vertex_values,dist='l1'):
 
         """
-        convenience function to find distance between circular coordinates of the largest barcode and a list of max/all barcode circular coordinates
+        Convenience function to find distance between circular coordinates of the largest barcode and a list of max/all barcode circular coordinates
         ----------
 
         Parameters:
@@ -544,6 +544,12 @@ class circular_coordinates():
 
             plot_bars(dgms,**barkwargs)
 
+    # def fit(self,data):
+    #     self.rips=ripsr(data,self.prime)
+    #     self.vertex_values=self.circular_coordinate(self.rips,self.prime)
+
+
+
     	    
     def fit_transform(self,data):
         """
@@ -560,7 +566,7 @@ class circular_coordinates():
         """
         
         self.rips=ripsr(data,self.prime)
-        vertex_values=self.circular_coordinates(self.rips,self.prime)
+        self.vertex_values=self.circular_coordinate(self.rips,self.prime)
         return vertex_values
 
     def plot_pca(self, data,vertex_values,**kwargs):
