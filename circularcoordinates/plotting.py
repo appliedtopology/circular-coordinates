@@ -47,7 +47,7 @@ def plot_PCA(data_pca,vert,xlabel='Principal Component 1',ylabel='Principal Comp
 
 def plot_check_all(rips,vert,fig_size=(10,10),ax=None, pt_style=None):
     """
-    Function to plot circular cordinates of all persistance barcodes
+    Function to plot circular cordinates of all persistence barcodes
     ----------
     Parameters:
         rips :(dict) 
@@ -81,13 +81,13 @@ def plot_check_all(rips,vert,fig_size=(10,10),ax=None, pt_style=None):
         
 def plot_check_max(vert,vert_list,fig_size=(10,10),ax=None, pt_style=None):
     """
-    Function to plot circular cordinates over the largest persistance barcode
+    Function to plot circular cordinates over the largest persistence barcode
     ----------
     Parameters:
         vert : ndarray
                 array of circulare coordinates mapped to (0,1)
         vert_list : list
-               list of points between birth and death of the largest persistance barcode
+               list of points between birth and death of the largest persistence barcode
         fig_size : tuple
                 size of plotted figure(default=(10,10))
         ax: AxesSubplot
@@ -125,7 +125,7 @@ def plot_eps(p1,vert,dist=None,rips=None,type=None,vert_list=None,fig_size=(10,1
             type : str
                     specify plotting against circular coordinates of all persistence barcodes or largest persistence barcode: 'All' or 'Max' 
             vert_list: ndarray
-                list of points between the birth and death of the largest persistance barcode 
+                list of points between the birth and death of the largest persistence barcode 
             fig_size : tuple
                     size of plotted figure(default=(10,10)) (only used if All and Max are False)
             ax: AxesSubplot
@@ -195,7 +195,7 @@ def plot_eps_3d(p1,vert,rips=None,type='All',vert_list=None,fig_size=(10,10)):
             type : str
                     specify plotting against circular coordinates of all persistence barcodes or largest persistence barcode: 'All' or 'Max' 
             vert_list: ndarray
-                list of points between the birth and death of the largest persistance barcode 
+                list of points between the birth and death of the largest persistence barcode 
             fig_size : tuple
                     size of plotted figure(default=(10,10)) 
             
@@ -262,7 +262,7 @@ def plot_bars(dgm, order='birth', ax=None, bar_style=None):
 
     Parameters:
         dgm: ndarray 
-            persistance barcode diagram 
+            persistence barcode diagram 
 
         order (str): How to sort the bars, either 'death' or 'birth'
                         (Default: 'birth')
@@ -299,7 +299,7 @@ def plot_diagram_density(dgm, lognorm=True, diagonal=True,
 
    Parametes:
         dgm: ndarray 
-            persistance barcode diagram 
+            persistence barcode diagram 
 
         lognorm (bool): Use logarithmic norm (Default: True)
         diagonal (bool):  (Default: True)
@@ -358,7 +358,7 @@ def plot_diagram(dgm, labels=False, ax=None,
     adapted from "https://github.com/mrzv/dionysus"
       Parameters:
         dgm: ndarray 
-            persistance barcode diagram 
+            persistence barcode diagram 
         labels (bool): Set axis labels. (Default: False)
         ax (AxesSubplot): Axes that should be used for plotting (Default: None)
         pt_style (dict): argments passed to `ax.scatter` for style of points.
