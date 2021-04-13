@@ -46,7 +46,7 @@ def plot_2dim(data,vert,xlabel='Principal Component 1',ylabel='Principal Compone
 
 # def plot_all(dgms,vert,fig_size=(10,10),ax=None, pt_style=None):
 #     """
-#     Function to plot circular cordinates of all persistance barcodes
+#     Function to plot circular cordinates of all persistence barcodes
 #     ----------
 #     Parameters:
 #         data_pca :(ndarray) 
@@ -80,7 +80,7 @@ def plot_2dim(data,vert,xlabel='Principal Component 1',ylabel='Principal Compone
         
 def plot_multi(vert,vert_list,fig_size=(10,10),ax=None, pt_style=None):
     """
-    Function to plot circular cordinates of mutiple persistance barcodes
+    Function to plot circular cordinates of mutiple persistence barcodes
     ----------
     Parameters:
         vert : ndarray
@@ -219,7 +219,7 @@ def plot_bars(dgm, order='birth', ax=None, bar_style=None):
 
     Parameters:
         dgm: ndarray 
-            persistance barcode diagram 
+            persistence barcode diagram 
 
         order (str): How to sort the bars, either 'death' or 'birth'
                         (Default: 'birth')
@@ -256,7 +256,7 @@ def plot_diagram_density(dgm, lognorm=True, diagonal=True,
 
    Parametes:
         dgm: ndarray 
-            persistance barcode diagram 
+            persistence barcode diagram 
 
         lognorm (bool): Use logarithmic norm (Default: True)
         diagonal (bool):  (Default: True)
@@ -315,7 +315,7 @@ def plot_diagram(dgm, labels=False, ax=None,
     adapted from "https://github.com/mrzv/dionysus"
       Parameters:
         dgm: ndarray 
-            persistance barcode diagram 
+            persistence barcode diagram 
         labels (bool): Set axis labels. (Default: False)
         ax (AxesSubplot): Axes that should be used for plotting (Default: None)
         pt_style (dict): argments passed to `ax.scatter` for style of points.

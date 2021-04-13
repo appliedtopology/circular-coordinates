@@ -66,7 +66,7 @@ class circular_coordinates():
     def boundary_cocycles(self,rips, epsilon,prime,spec=None):
 
         """
-        Covenience function that combines 'delta' and 'cocycles'
+        Convenience function that combines 'delta' and 'cocycles'
         ----------
         Parameters:
             rips : dict
@@ -234,18 +234,18 @@ class circular_coordinates():
                 index of epsilon
             check: string
                 can be 'All' or 'Max' or None:
-                    All: compute circular coordinates for all persistance barcodes
-                    Max: compute cicular coordinates over the largest persistance barcode
-                    None:  compute cicular coordinates for the largest persistance barcode or epsilon
+                    All: compute circular coordinates for all persistence barcodes
+                    Max: compute circular coordinates over the largest persistence barcode
+                    None:  compute circular coordinates for the largest persistence barcode or epsilon
             intr: int
-                Only required if check is 'Max', specifies as to how many points to compute coordinates over the max persistance barcode
+                Only required if check is 'Max', specifies as to how many points to compute coordinates over the max persistence barcode
             
         Returns
                 vertex_values : ndarray
                     circular coordinates
                 OR
                 max_/all_ : ndarray
-                    list of circular coordinates of all persistance barcodes or binned from the longest barcode based on the 'check' input
+                    list of circular coordinates of all persistence barcodes or binned from the longest barcode based on the 'check' input
                 all_list/max_list: ndarray
                     list of epsilon for which the circular coordinates are computed 
         """
@@ -281,7 +281,7 @@ class circular_coordinates():
     def all_verts(self,rips,prime,init_verts,dist=None):
 
         """
-        function to find circular coordinates for all persistance barcodes
+        function to find circular coordinates for all persistence barcodes
         ----------
         Parameters:
         rips : dict
@@ -289,14 +289,14 @@ class circular_coordinates():
         prime : int
                  the prime basis over which to compute homology.
         init_verts: ndarray
-               circular coordinates of the longest persistance barcode 
+               circular coordinates of the longest persistence barcode 
         dist : string
             distance calculation metric betweeen the circular coordinates: 'l1','l2', 'cosine' or 'None'
 
 
         Returns
         all_ : list
-            circular coordinates for all persistance barcodes
+            circular coordinates for all persistence barcodes
         dist_ : list
             distances between the the circular coordinates
         """
@@ -321,7 +321,7 @@ class circular_coordinates():
     def max_verts(self,rips,prime,init_verts,intr=10,dist=None):
 
         """
-        function to find circular coordinates over the largest persistance barcode
+        function to find circular coordinates over the largest persistence barcode
         ----------
 
         Parameters:
@@ -330,15 +330,15 @@ class circular_coordinates():
         prime : int
                  the prime basis over which to compute homology.
         init_verts: ndarray
-               circular coordinates of the longest persistance barcode 
+               circular coordinates of the longest persistence barcode 
         intr : int
-            specifies as to how many points to compute the circular coordinates of over the largest persistance barcode
+            specifies as to how many points to compute the circular coordinates of over the largest persistence barcode
         dist : string
             distance calculation metric betweeen the circular coordinates: 'l1','l2', 'cosine' or 'None'
 
         Returns
         max_ : list
-            circular coordinates over the largest persistance barcode
+            circular coordinates over the largest persistence barcode
 
         arr: ndarray
             list of points used between the birth and death of the largest barcode
@@ -446,8 +446,8 @@ class circular_coordinates():
         type : string
             type of plot:
             2d: 2d scatter plot
-            2d_multi:2d scatter plot over the largest persistance barcode or all persistance barcodes
-            3d_multi:3d scatter plot over the largest persistance barcode or all persistance barcodes
+            2d_multi:2d scatter plot over the largest persistence barcode or all persistence barcodes
+            3d_multi:3d scatter plot over the largest persistence barcode or all persistence barcodes
     
 
         all other parameters please refer to plot_eps and plot_eps_3d in plotting.py
@@ -495,13 +495,13 @@ class circular_coordinates():
     def plot_barcode(self,dgms=None,type='bar',**kwargs):
 
         """
-        Function to plot persistance barcodes
+        Function to plot persistence barcodes
         ----------
 
         Parameters:
 
         dgms:ndarray or list
-            list of birth and death of persistance barcodes
+            list of birth and death of persistence barcodes
 
         type:string
             type of plot:
