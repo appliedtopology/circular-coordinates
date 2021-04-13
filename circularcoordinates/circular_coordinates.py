@@ -7,7 +7,7 @@ from  .plotting import *
 
 def ripsr(data,prime):
     """
-    convenience function to compute Vietoris–Rips persistence barcodes using the ripser library
+    Convenience function to compute Vietoris–Rips persistence barcodes using the ripser library
     ----------
 
     Parameters:
