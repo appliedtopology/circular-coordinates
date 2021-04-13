@@ -35,7 +35,7 @@ def errs(str_,err_,errs_):
             raise ValueError(str_+ ' can only be '+ str(errs_)[1:-1])
 
 
-class circular_coordinates():
+class circular_coordinate():
 
     """
     This is the  main class for circular-coordinates library used to create and plot circular coordinates from persistent cohomology 
@@ -163,7 +163,7 @@ class circular_coordinates():
         else:
             for cocycle in rout["cocycles"][1]:
                 val = cocycle[:,2]
-                val[val > (prime-1)/2] -= prime
+                val[val > (self.prime-1)/2] -= self.prime
                 Y = sparse.coo_matrix((val,(cocycle[:,0],cocycle[:,1])), shape=(distances.shape[0],distances.shape[0]))
                 Y = Y - Y.T
                 Z = np.zeros((dshape,))
@@ -218,7 +218,7 @@ class circular_coordinates():
         # return self.data_pca
   
         
-    def circular_coordinates(self,plot=False,arg_eps=None,check=None,intr=10):
+    def circular_coordinate(self,plot=False,arg_eps=None,check=None,intr=10):
         
         """
             computes and plots the circular_coordinates
@@ -247,7 +247,7 @@ class circular_coordinates():
         if check=='All':
 
             if self.vertex_values is None:
-                self.circular_coordinates()
+                self.circular_coordinate()
 
             all_,_=self.all_verts()
             if plot:
@@ -257,7 +257,7 @@ class circular_coordinates():
         elif check=='Max':
 
             if self.vertex_values is None:
-                self.circular_coordinates()
+                self.circular_coordinate()
 
             max_,max_list,_=self.max_verts(intr=intr)
             if plot:

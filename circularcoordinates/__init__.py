@@ -2,4 +2,4 @@
 
 from .plotting import *
 
-from .circular_coordinates import circular_coordinates
+from .circular_coordinates import circular_coordinate
