@@ -497,7 +497,7 @@ class circular_coordinate():
                 intr=kwargs['intr']  
                 kwargs.pop('intr', None)
         if 'dist' not in kwargs:
-                dist='l1'
+                dist_='l1'
         else:
                 dist=kwargs['dist']  
                 kwargs.pop('dist', None)
