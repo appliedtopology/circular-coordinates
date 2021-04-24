@@ -459,7 +459,7 @@ class circular_coordinate():
 
 
 
-    def plot_eps(self,p1,vertex_values,vert_list=None,dist_=None,type='2d',**kwargs):
+    def plot_eps(self,p1,vertex_values,vert_list=None,init_verts=None,dist_='l1',type='2d',**kwargs):
 
         """Function to plot external data with the circular coordinates
         
@@ -491,16 +491,11 @@ class circular_coordinate():
         types=['2d','2d_multi','3d_multi']
         errs('type',type,types)
         
-        if 'intr' not in kwargs:
-                intr=10
-        else:
-                intr=kwargs['intr']  
-                kwargs.pop('intr', None)
-        if 'dist' not in kwargs:
-                dist_='l1'
-        else:
-                dist=kwargs['dist']  
-                kwargs.pop('dist', None)
+        # if 'intr' not in kwargs:
+        #         intr=10
+        # else:
+        #         intr=kwargs['intr']  
+        #         kwargs.pop('intr', None)
                    
 
         if type=='2d':
@@ -514,7 +509,8 @@ class circular_coordinate():
             twodkwargs={'ax':None,"pt_style":None,"scrollable":False}
             if kwargs is not None:
                 twodkwargs.update(kwargs)
-            plot_eps(p1,vertex_values,type='multi',vert_list=vert_list,dist=dist_,**twodkwargs)
+                
+            plot_eps(p1,vertex_values,type='multi',vert_list=vert_list,dist=self.get_dist_all(init_verts,vertex_values,dist_),**twodkwargs)
      
         elif type=='3d_multi':
             threedkwargs={"fig_size":(10,10)}
