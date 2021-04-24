@@ -6,21 +6,21 @@ from scipy import spatial
 from  .plotting import *
 
 def ripsr(data,prime):
-    """
-    Convenience function to compute Vietoris–Rips persistence barcodes using the ripser library
+   
+    """Convenience function to compute Vietoris–Rips persistence barcodes using the ripser library
+
+    Parameters
     ----------
-
-    Parameters:
-
     data : ndarray or pandas dataframe
-            input data
-        prime: int
-            prime basis to compute homology
+         Input data.
+     prime : int
+         Prime basis to compute homology.
 
     Returns
-        rips : dict
-            result of ripser
-    
+    -------
+    dict
+        result of ripser.
+
     """
     if isinstance(data, np.ndarray) :
             data1=data
@@ -35,12 +35,22 @@ def errs(str_,err_,errs_):
 
 
 class circular_coordinate():
-    """
-        This is the  main class for circular-coordinates library used to create and plot circular coordinates from persistent cohomology 
-        ----------
-        Parameters:
-            prime : int
-                    the prime basis over which to compute homology
+    """This is the  main class for circular-coordinates library used to create and plot circular coordinates from persistent cohomology.
+
+
+    Parameters
+    ----------
+    prime : int
+        The prime basis over which to compute homology
+
+    Attributes
+    ----------
+    prime : int
+        The prime basis over which to compute homology
+    ripsr : dict
+        Result of ripser on input data
+    vertex_values : list
+        List of circular coordinates
 
     """
 
@@ -52,37 +62,45 @@ class circular_coordinate():
 
 
     def get_epsilon(self,dgms):
-        """
-        Finds index of epsilon from the homology persistence diagram
-        ----------
+        """Finds index of epsilon from the homology persistence diagram
 
+        Parameters
+        ----------
+        dgms:ndarray or list
+            List of birth and death of persistence barcodes.
+
+        
         Returns
-        arg_eps : int
-                the index of epsilon
+        -------
+        int
+           The index of epsilon.
+
         """
         arg_eps = max(enumerate(dgms), key = lambda pt: pt[1][1] - pt[1][0])[0]
         return arg_eps
 
     def boundary_cocycles(self,rips, epsilon,prime,spec=None):
 
-        """
-        Convenience function that combines 'delta' and 'cocycles'
+        """Convenience function that combines 'delta' and 'cocycles'
+        
+        Parameters
         ----------
-        Parameters:
-            rips : dict
-                The result from ripser(computing the vitoris rips complex) on the input data.
-            prime : int
-                 the prime basis over which to compute homology.
-        epsilon: float
-            epsilon used to truncate the vitoris rips
-        spec: int
-            the index of the specific cocycle to extract. If spec is 'None' all cocycles will be retuned
+        rips:dict
+            The result from ripser(computing the vitoris rips complex) on the input data.
+        prime:int
+            The prime basis over which to compute homology.
+        epsilon:float
+            Epsilon used to truncate the vitoris rips
+        spec:int
+            The index of the specific cocycle to extract. If spec is 'None' all cocycles will be retuned
 
+        
         Returns
-            Delta : ndarray
-                 boundary (𝛿⁰)
-            cocycles : ndarray
-                specific cocycle or all cocycles
+        -------
+        Delta:ndarray
+            boundary (𝛿⁰)
+        cocycles:ndarray
+            specific cocycle or all cocycles
 
         """
 
@@ -99,19 +117,20 @@ class circular_coordinate():
     
     def delta(self,distances,edges):
 
-        """
-        Constructs the boundary (𝛿⁰)
+        """Constructs the boundary (𝛿⁰)
+        
+        Parameters
         ----------
-        Parameters:
 
-        distances: ndarray
+        distances:ndarray
             Distances from points in the ripser greedy permutation to points in the original data point set
-        edges: ndarray
-            distances truncated to epsilon
+        edges:ndarray
+            Distances truncated to epsilon
 
         Returns
-        Delta : ndarray
-                boundary (𝛿⁰)
+        -------
+        ndarray
+            boundary (𝛿⁰)
         """
         I = np.c_[np.arange(edges.shape[0]),np.arange(edges.shape[0])]
         I = I.flatten()
@@ -122,27 +141,29 @@ class circular_coordinate():
         return Delta
     
     def cocycles(self,rips,distances,edges,dshape,prime,spec=None):
-        """
-        Extracts cocycles
+        
+        """Extracts cocycles
+        
+        Parameters
         ----------
-        Parameters:
 
         rips :dict
             The result from ripser on the input data.
         distances: ndarray
             Distances from points in the greedy permutation to points in the original point set
         edges: ndarray
-            distances truncated to epsilon
+            Distances truncated to epsilon
         dshape: int
-            number of rows in boundary (𝛿⁰)
+            Number of rows in boundary (𝛿⁰)
         prime : int
-                 the prime basis over which to compute homology.
+            The prime basis over which to compute homology.
         spec: int
-            the index of the specific cocycle to extract. If spec is 'None' all cocycles will be retuned
+            The index of the specific cocycle to extract. If spec is 'None' all cocycles will be retuned
 
 
         Returns
-            cocycles : ndarray
+        -------
+        ndarray
             specific cocycle or all cocycles
         """
 
@@ -176,19 +197,20 @@ class circular_coordinate():
     
     def minimize(self,Delta,cocycle):
 
-        """
-        Minimizes ∥ζ-𝛿1α∥2 and computes vertex values map to [0,1]
+        """Minimizes ∥ζ-𝛿1α∥2 and computes vertex values map to [0,1]
+        
+        Parameters
         ----------
-        Parameters:
 
         Delta : ndarray
-                boundary (𝛿⁰)
+            Boundary (𝛿⁰)
         cocycle: ndarray
-            corresponding cocycle (ζ)
+            Corresponding cocycle (ζ)
 
         Returns
-        vertex_values : ndarray
-                circular coordinates mapped to [0,1] interval
+        -------
+        ndarray
+            circular coordinates mapped to [0,1] interval
         """
 
         mini = sparse.linalg.lsqr(Delta, np.array(cocycle).squeeze())
@@ -198,13 +220,22 @@ class circular_coordinate():
 
     def PCA_(self,data,n=2):
 
-        """
-        convenience function to perform PCA on input data
+        """Convenience function to perform PCA on input data
+        
+        Parameters
         ----------
-        Parameters:
 
         n : int
-                number of dimensions pca should reduce the data to.
+            Number of dimensions pca should reduce the data to.
+
+        data : ndarray or pandas dataframe
+            Input data.
+
+
+        Returns
+        -------
+        ndarray
+           N-dimensonal pca of the data
 
         """
 
@@ -219,35 +250,36 @@ class circular_coordinate():
         
     def circular_coordinate(self,rips,prime,vertex_values=None,arg_eps=None,check=None,intr=10):
         
-        """
-            Computes and plots the circular_coordinates
+        """Computes and plots the circular_coordinates
+        
+        Parameters
         ----------
-        Parameters:
 
-           rips : dict
+            rips : dict
                 The result from ripser(computing the vitoris rips complex) on the input data.
             prime : int
-                 the prime basis over which to compute homology.
+                The prime basis over which to compute homology.
             vertex_values : ndarray
-                circular coordinates of the longest barcode
+                Circular coordinates of the longest barcode
             arg_eps: int
-                index of epsilon
+                Index of epsilon
             check: string
-                can be 'All' or 'Max' or None:
+                Can be 'All' or 'Max' or None:
                     All: compute circular coordinates for all persistence barcodes
                     Max: compute circular coordinates over the largest persistence barcode
                     None:  compute circular coordinates for the largest persistence barcode or epsilon
             intr: int
                 Only required if check is 'Max', specifies as to how many points to compute coordinates over the max persistence barcode
             
+       
         Returns
-                vertex_values : ndarray
-                    circular coordinates
-                OR
-                max_/all_ : ndarray
-                    list of circular coordinates of all persistence barcodes or binned from the longest barcode based on the 'check' input
-                all_list/max_list: ndarray
-                    list of epsilon for which the circular coordinates are computed 
+        -------
+            vertex_values : ndarray
+                circular coordinates
+            max_/all_ : ndarray
+                list of circular coordinates of all persistence barcodes or binned from the longest barcode based on the 'check' input
+            all_list/max_list: ndarray
+                list of epsilon for which the circular coordinates are computed 
         """
         checks=['All','Max',None]
         errs('check',check,checks)
@@ -280,25 +312,26 @@ class circular_coordinate():
     
     def all_verts(self,rips,prime,init_verts,dist=None):
 
-        """
-        Function to find circular coordinates for all persistence barcodes
+        """Function to find circular coordinates for all persistence barcodes
+        
+        Parameters
         ----------
-        Parameters:
         rips : dict
-                The result from ripser(computing the vitoris rips complex) on the input data.
+            The result from ripser(computing the vitoris rips complex) on the input data.
         prime : int
-                 the prime basis over which to compute homology.
+            The prime basis over which to compute homology.
         init_verts: ndarray
-               circular coordinates of the longest persistence barcode 
+            Circular coordinates of the longest persistence barcode 
         dist : string
-            distance calculation metric betweeen the circular coordinates: 'l1','l2', 'cosine' or 'None'
+            Distance calculation metric betweeen the circular coordinates: 'l1','l2', 'cosine' or 'None'
 
 
         Returns
+        -------
         all_ : list
-            circular coordinates for all persistence barcodes
+            Circular coordinates for all persistence barcodes
         dist_ : list
-            distances between the the circular coordinates
+            Distances between the the circular coordinates
         """
         dists=['l1','l2' ,'cosine',None]
         errs('dist',dist,dists)
@@ -320,31 +353,31 @@ class circular_coordinate():
     
     def max_verts(self,rips,prime,init_verts,intr=10,dist=None):
 
-        """
-        Function to find circular coordinates over the largest persistence barcode
+        """Function to find circular coordinates over the largest persistence barcode
+        
+        Parameters
         ----------
-
-        Parameters:
         rips : dict
-                The result from ripser(computing the vitoris rips complex) on the input data.
+            The result from ripser(computing the vitoris rips complex) on the input data.
         prime : int
-                 the prime basis over which to compute homology.
+            The prime basis over which to compute homology.
         init_verts: ndarray
-               circular coordinates of the longest persistence barcode 
+            Circular coordinates of the longest persistence barcode 
         intr : int
-            specifies as to how many points to compute the circular coordinates of over the largest persistence barcode
+            Specifies as to how many points to compute the circular coordinates of over the largest persistence barcode
         dist : string
-            distance calculation metric betweeen the circular coordinates: 'l1','l2', 'cosine' or 'None'
+            Distance calculation metric betweeen the circular coordinates: 'l1','l2', 'cosine' or 'None'
 
         Returns
+        -------
         max_ : list
-            circular coordinates over the largest persistence barcode
+            Circular coordinates over the largest persistence barcode
 
         arr: ndarray
-            list of points used between the birth and death of the largest barcode
+            List of points used between the birth and death of the largest barcode
 
         dist_ : list
-            distances between the the circular coordinates
+            Distances between the the circular coordinates
         
 
         """
@@ -369,20 +402,20 @@ class circular_coordinate():
 
     def get_dist(self,init_verts,vert,dist='l1'):
 
-        """
-        Convenience function to find distance between two sets of circular coordinates
+        """Convenience function to find distance between two sets of circular coordinates
+        
+        Parameters
         ----------
-
-        Parameters:
         init_verts : ndarray
-                the first array of circular coordinates
+            The first array of circular coordinates
         vert : ndarray
-                the second array of circular coordinates
+            The second array of circular coordinates
         dist : string
-            distance calculation metric betweeen the circular coordinates: 'l1','l2' or 'cosine'
+            Distance calculation metric betweeen the circular coordinates: 'l1','l2' or 'cosine'
 
         Returns
-        d : float
+        -------
+        float
             distance
 
         
@@ -398,20 +431,20 @@ class circular_coordinate():
 
     def get_dist_all(self,init_verts,vertex_values,dist='l1'):
 
-        """
-        Convenience function to find distance between circular coordinates of the largest barcode and a list of max/all barcode circular coordinates
+        """Convenience function to find distance between circular coordinates of the largest barcode and a list of max/all barcode circular coordinates
+        
+        Parameters
         ----------
-
-        Parameters:
         init_verts : ndarray
-                the first array of circular coordinates
+            The first array of circular coordinates
         vertex_values : ndarray
-                array of arrays of circular coordinates
+            Array of arrays of circular coordinates
         dist : string
-            distance calculation metric betweeen the circular coordinates: 'l1','l2' or 'cosine'
+            Distance calculation metric betweeen the circular coordinates: 'l1','l2' or 'cosine'
 
         Returns
-        dist_ : list
+        -------
+        list
             list of distances
 
         
@@ -428,28 +461,28 @@ class circular_coordinate():
 
     def plot_eps(self,p1,vertex_values,vert_list=None,dist_=None,type='2d',**kwargs):
 
-        """
-        Function to plot external data with the circular coordinates
+        """Function to plot external data with the circular coordinates
+        
+        Parameters
         ----------
 
-        Parameters:
-
         p1 : ndarray
-            external data
+            External data
         vertex_values : ndarray(2d or 3d)
-                array of circular coordinates or array of arrays of circular coordinates depending on the type of plot
+            Array of circular coordinates or array of arrays of circular coordinates depending on the type of plot
         vert_list : ndarray
-                list of epsilons. Required if vertex_values is array of arrays
+            List of epsilons. Required if vertex_values is array of arrays
         dist : list
-            list of distances to show along side plots
+            List of distances to show along side plots
         
         type : string
-            type of plot:
+            Type of plot:
             2d: 2d scatter plot
             2d_multi:2d scatter plot over the largest persistence barcode or all persistence barcodes
             3d_multi:3d scatter plot over the largest persistence barcode or all persistence barcodes
     
-
+        Notes
+        -----
         all other parameters please refer to plot_eps and plot_eps_3d in plotting.py
 
        
@@ -494,21 +527,23 @@ class circular_coordinate():
 
     def plot_barcode(self,dgms=None,type='bar',**kwargs):
 
-        """
-        Function to plot persistence barcodes
+        """Function to plot persistence barcodes
+        
+        Parameters
         ----------
 
-        Parameters:
-
         dgms:ndarray or list
-            list of birth and death of persistence barcodes
+            List of birth and death of persistence barcodes
 
         type:string
-            type of plot:
+            Type of plot:
             scatter:  Plot the persistence diagram as a scatter plot with line
             hist:Plot the histogram of point density
             bar:Plot the barcode as bars.
 
+        
+        Notes
+        -----
         all other parameters please refer to plot_diagram, plot_diagram_density and plot_bars in plotting.py
 
 
@@ -552,33 +587,39 @@ class circular_coordinate():
 
     	    
     def fit_transform(self,data):
-        """
-        Function to find circular coordinates from persistent cohomology of input data
+        """Function to find circular coordinates from persistent cohomology of input data
+        
+        Parameters
         ----------
 
-        Parameters:
-
          data :(ndarray or pandas dataframe) 
-            input data
+            Input data
+
+        Returns
+        -------
+        list
+            List of circular coordinates
+
        
-
-
         """
         
         self.rips=ripsr(data,self.prime)
         self.vertex_values=self.circular_coordinate(self.rips,self.prime)
-        return vertex_values
+        return self.vertex_values
 
     def plot_pca(self, data,vertex_values,**kwargs):
-            """
-            Function to plot pca of data with circular cordinates represented as colors on the rgb color wheel
+            """Function to plot pca of data with circular cordinates represented as colors on the rgb color wheel
+            
+            Parameters
             ----------
-            Parameters:
 
             data :(ndarray or pandas dataframe) 
-                input data
+                Input data
             vertex_values: ndarray
-                circular coordinates
+                Circular coordinates
+
+            Notes
+            -----
             all other parameters please refer to plot_2dim in plotting.py
             """
             plot_kwargs={'xlabel':'Principal Component 1','ylabel':'Principal Component 2','fig_size':(10,10),'ax':None, 'pt_style':None}
@@ -588,17 +629,20 @@ class circular_coordinate():
 
         
 
-    def plot_multi(sef,vertex_values,vertex_list,**kwargs):
+    def plot_multi(self,vertex_values,vertex_list,**kwargs):
 
-        """
-        Function to plot circular cordinates of multiple barcodes
+        """Function to plot circular cordinates of multiple barcodes
+        
+        Parameters
         ----------
-        Parameters:
-         vertex_values: ndarray
+        vertex_values: ndarray
             list of circular coordinates
 
-         vertex_list: ndarray
+        vertex_list: ndarray
             list of epsions 
+        
+        Notes
+        -----
         all other parameters please refer to plot_multi in plotting.py
         """
 

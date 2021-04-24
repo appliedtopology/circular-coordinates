@@ -11,10 +11,10 @@ from .scroll import ScrollableWindow
 
 
 def plot_2dim(data,vert,xlabel='Principal Component 1',ylabel='Principal Component 2',fig_size=(10,10),ax=None, pt_style=None):
-    """
-    Function to plot 2 dimensional data with circular cordinates represented as colors on the rgb color wheel
-    ----------
+    """Function to plot 2 dimensional data with circular cordinates represented as colors on the rgb color wheel
+    
     Parameters:
+    ----------
         data :(ndarray) 
             input data in 2 dimensions
         vert : ndarray
@@ -81,8 +81,9 @@ def plot_2dim(data,vert,xlabel='Principal Component 1',ylabel='Principal Compone
 def plot_multi(vert,vert_list,fig_size=(10,10),ax=None, pt_style=None):
     """
     Function to plot circular cordinates of mutiple persistence barcodes
-    ----------
+    
     Parameters:
+    ----------
         vert : ndarray
                 array of arrays of circular coordinates mapped to (0,1)
         vert_list : list
@@ -115,8 +116,9 @@ def plot_eps(p1,vert,dist=None,type=None,vert_list=None,fig_size=(10,10),ax=None
 
         """
         Function to plot external data with the circular coordinates as a scatter plot
-        ----------
+       
         Parameters:
+        ----------
             p1 :(ndarray) 
                 external data
             vert : ndarray
@@ -176,8 +178,9 @@ def plot_eps_3d(p1,vert,vert_list=None,fig_size=(10,10)):
 
         """
         Function to plot external data with the circular coordinates as a 3d scatter plot
-        ----------
+        
         Parameters:
+        ----------
             p1 :(ndarray) 
                 external data
             vert : ndarray
@@ -218,6 +221,7 @@ def plot_bars(dgm, order='birth', ax=None, bar_style=None):
     adapted from "https://github.com/mrzv/dionysus"
 
     Parameters:
+    ----------
         dgm: ndarray 
             persistence barcode diagram 
 
@@ -255,6 +259,7 @@ def plot_diagram_density(dgm, lognorm=True, diagonal=True,
     adapted from "https://github.com/mrzv/dionysus"
 
    Parametes:
+   ----------
         dgm: ndarray 
             persistence barcode diagram 
 
@@ -313,7 +318,9 @@ def plot_diagram(dgm, labels=False, ax=None,
     """
     Plot the persistence diagram.
     adapted from "https://github.com/mrzv/dionysus"
-      Parameters:
+    
+    Parameters:
+    ----------
         dgm: ndarray 
             persistence barcode diagram 
         labels (bool): Set axis labels. (Default: False)
