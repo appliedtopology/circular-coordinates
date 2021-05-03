@@ -14,7 +14,7 @@ Circular-Coordinates is an all in one class that facilitates creating and plotti
 - Provides multiple ways of plotting and visualizing the output.
 
 ## Setup
-You can install the library directly from github(will be published on Pypi soon). You will need PyQt5 before installing.
+You can install the library directly from github(will be published on Pypi soon). You will need PyQt5 before installing(only for visualizing plots in ide will be optional in future).
 
 ```
 pip install PyQt5
