@@ -48,7 +48,7 @@ circ.plot_barcode(circ.rips['dgms'][1])
 ```
 ![Barcode PLOT](https://drive.google.com/uc?export=download&id=1ARj-ta2Zk-pVN62l6_OjfzyMUouwTkDA)
 
-Circular coordinates can also be plottted against externa data to see what patterns emerge.
+Circular coordinates can also be plottted against external data to see what patterns emerge.
 ```
 circ.plot_eps(df['Day Post Infection'],vertex_values)
 ```
