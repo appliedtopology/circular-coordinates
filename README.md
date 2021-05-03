@@ -22,7 +22,7 @@ pip install git+https://github.com/appliedtopology/circular-coordinates
 ```
 
 ## Example usage
-Circular coordinates can be calculated and visualized with only a few lines of code. The circular coordinates are outputed mapped between [0,1]. When visualising the coordinates are denoted by colors on the color wheel (with its values mapped to [0,1]). Thus forming a loop stretching from 0 to 1.
+Circular coordinates can be calculated and visualized with only a few lines of code. The circular coordinates are outputted mapped between [0,1]. When visualising the coordinates are denoted by colors on the color wheel (with its values mapped to [0,1]). Thus forming a loop stretching from 0 to 1.
 ```
 import pandas as pd
 import circularcoordinates
