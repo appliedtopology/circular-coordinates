@@ -14,12 +14,16 @@ Circular-Coordinates is an all in one class that facilitates creating and plotti
 - Provides multiple ways of plotting and visualizing the output.
 
 ## Setup
-You can install the library directly from github(will be published on Pypi soon). You will need PyQt5 before installing(only for visualizing plots in ide will be optional in future).
+You can install the library directly from github or Pypi. PyQt5 is optional(only for visualizing plots in ide).
 
 ```
 pip install PyQt5
+
 pip install git+https://github.com/appliedtopology/circular-coordinates
+OR
+pip install circularcoordinates
 ```
+
 
 ## Example usage
 Circular coordinates can be calculated and visualized with only a few lines of code. The circular coordinates are outputted mapped between [0,1]. When visualising the coordinates are denoted by colors on the color wheel (with its values mapped to [0,1]). Thus forming a loop stretching from 0 to 1.
