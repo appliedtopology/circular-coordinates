@@ -5,7 +5,7 @@ from matplotlib.collections import PolyCollection
 from matplotlib import colors as mcolors
 import numpy as np
 import math
-from .scroll import ScrollableWindow
+
 
 
 
@@ -156,6 +156,7 @@ def plot_eps(p1,vert,dist=None,type=None,vert_list=None,fig_size=(10,10),ax=None
                 plt.title('eps='+str(eps)[:4] +', dist='+ str(dist[ind])[:4])
             plt.tight_layout()
             if scrollable:
+                from .scroll import ScrollableWindow
                 a = ScrollableWindow(fig)
                 
 
